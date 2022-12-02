@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="TP1.css">
+      <title>Compte Rendu de TP1</title>
+   </head>
+   <body>
+      <h1>Compte Rendu de TP1</h1>
+      <table>
+         <tbody>
+            <tr>
+               <td>       					  
+               <td> MAX DUCOUDRE         
+            <tr>
+               <td> ESIPE INFO 1              
+               <td>             
+            <tr>
+               <td> TP 1 de Programmation Web 
+               <td>     
+      </table>
+      <h2>Exercice 1: Document de base</h2>
+      <ol>
+         <li>
+            A quoi servent les tags h1, h2 et h3 ? 
+            <br>
+            Les tags h1, h2 et h3 permettent d'écrire des titres par ordre d'importance.
+         </li>
+         <li>
+            A quoi sert le tag p ? 
+            <br>
+            Le tag p permet d'écrire des paragraphes.
+         </li>
+         <li>
+            Ajoutez à votre compte rendu la phrase suivante : 
+            <br>
+            Les tags HTML commencent par une balise ouvrante &lt;foo&gt; et finissent par une balise fermante &lt;/foo&gt;
+         </li>
+         <li>
+            Comment mettre en gras ou en italique ?  
+            <br>
+            Pour mettre un texte en gras, il faut utiliser les balises &lt;b&gt;&lt;/b&gt; tandis que pour mettre en <i>italique</i>, il faut utiliser les balises <i>&lt;i&gt;&lt;/i&gt; </i>
+         </li>
+         <li>
+            Et comment faire pour mettre un mot à la fois en gras et en italique ?   
+            <br>
+            Pour mettre un mot à la fois en <i>gras et en italique</i>, il faut utiliser cette syntaxe : "&lt;b&gt; &lt;i&gt; word &lt;/i&gt;  &lt;/b&gt;"
+         </li>
+         <li>
+            On souhaite que le titre de la fenêtre du navigateur soit "Compte Rendu de TP1", comment faire ?   
+            <br>
+            Pour changer le titre de la fenêtre du navigateur, il faut ajouter la balise &lt;title&gt;Compte Rendu de TP1&lt;/title&gt; dans le contenu de la balise &lt;head&gt;
+         </li>
+         <li>
+            Ajoutez un lien (le tag A) vers le cours avec comme titre cours de programmation web. 
+            <br>
+            Lien vers le <a href="http://forax.github.io/course/progweb/#/"	>cours de programmation web</a>
+         </li>
+         <li>
+            Prenez une feuille de papier puis dessinez l'arbre des différents tags correspondant à votre compte rendu.
+            Attention à bien respecter quel tag se trouve déclaré dans tel autre.
+         </li>
+         <li>
+            Avec votre smartphone (ou celui du voisin), prenez une photo de la feuille de papier sur laquelle vous avez dessiné l'arbre et envoyez-la vous par mail. Puis allez dans vos mails pour récupérer l'image et la sauvegarder sous le nom de mon-arbre-a-moi.jpg.  
+            <br>
+            <img width="500" height="250" src="mon-arbre-a-moi.jpg" alt="Image d'une feuille illustrant l'arborescence HTML de la page">
+         </li>
+         <li>
+            Creér le fichier tp1.css vide et ajouter un lien de votre compte rendu vers le fichier CSS pour que vous puissiez avoir un jolie rendu lorsque, à la maison, vous ajouterez quelques sélecteurs CSS pour que cela soit pas trop moche.  
+         </li>
+      </ol>
+      <h2>Exercice 2 - Uniform Resource Locator</h2>
+      <p> On cherche à savoir où est hébergé le cours de programmation Web. </p>
+      <ol>
+         <li>
+            Ouvrez un navigateur Web et allez à l'URL suivante: 
+            <pre> http://monge.univ-mlv.fr/ens/</pre>
+            Quel est le nom de la machine à laquelle vous accédez ?
+            monge
+            <br>
+            Quel est le nom de domaine auquel vous accédez ? 
+            univ-mlv.fr
+         </li>
+         <li>
+            Si l'on exécute  
+            <pre>      host monge.univ-mlv.fr</pre>
+            À quoi correspond la première ligne de la réponse ? 
+            Elle correspond à l'adresse IP correspondant au nom de domaine
+            <br>
+            À quoi correspond la seconde ligne de la réponse ? 
+            Elle correspond au serveur mail du nom de domaine
+         </li>
+         <li>
+            Dans le navigateur Web, dans la barre contenant l'URL, remplacez le nom de la machine par son adresse IP pour vérifier que cela fonctionne toujours.
+            A votre avis, pourquoi utilise-t-on des noms pour les machines plutôt que des adresses IP ?  
+            <br>
+            Quand on inscrit l'adresse IP de la machine sur la barre d'URL, on tombe bien sur le site internet de l'université. Utiliser des noms pour les machines rend la navigation plus simple pour les humains.
+         </li>
+         <li>
+            On cherche maintenant à faire la même chose avec la machine hébergeant le cours http://forax.github.io/course/progweb/.
+            Utiliser la commande host pour récupérer l'adresse IP de la machine correspondant à l'URL.   
+            <pre> host http://forax.github.io/course/progweb/ </pre>
+            L'adresse IP de cette machine est 185.199.109.153
+         </li>
+         <li>
+            Exécutez la commande traceroute sur l'adresse IP de la machine forax.github.io.
+            <ul>
+               <li>
+                  Qu'affiche cette commande ? <br> 
+                  Cette commande affiche la listes des routeurs auquels il a fallut passer pour communiquer avec la machine forax.github.io <br>
+               </li>
+               <li>
+                  Quel est le nom du routeur de sortie (le premier que vous rencontrez) ? <br>
+                  Le nom du routeur de sortie est gwetud.u-pem.fr<br>
+               </li>
+               <li>
+                  Comment s'appelle le réseau sur lequel est connecté l'université (le nom de domaine du  routeur après le routeur de sortie) ? <br>
+                  Il s'agit du réseau 195.220.83.114
+               </li>
+               <li>
+                  Quels sont les autres réseaux qui sont traversés ? <br>
+                  vl1488-te0-1-0-2-ren-nr-marne-rtr-091.noc.renater.fr, vl630-te0-0-0-11-ren-nr-jussieu-rtr-091.noc.renater.fr, vl630-te0-0-0-11-ren-nr-jussieu-rtr-091.noc.renater.fr
+               </li>
+            </ul>
+         </li>
+         <li>
+            Nous allons nous intéresser au site Web http://www.mai-ko.com/. 
+            <ul>
+               <li>
+                  Quel est le nom de la machine hébergeant le site Web ?<br>
+                  Le nom de la machine est "www"
+               </li>
+               <li>
+                  Quel est le nom de domaine associé à cette machine ? <br>
+                  Le nom de domaine associé à cette machine "mai-ko.com"
+               </li>
+               <li>
+                  En utilisant la commande whois dans un terminal, trouvez quelle est la ville (sur terre) de l'hébergeur de cette organisation.<br>
+                  <pre>whois mai-ko.com | grep City</pre>
+                  Ce qui donne la ville de Kyoto Shi Nakagyo Ku
+                  <br>Note: au lieu d'envoyer n'importe quoi en paramètre de la commande whois, commencer par faire un man whois pour avoir le manuel de la commande whois, comme cela vous saurez ce que prend la commande whois comme paramétre.
+               </li>
+               <li>
+                  Puis faites un ping sur la machine www.mai-ko.com.
+                  Les temps affichés et le ttl vous semble-t'il corrects ?
+                  <br>
+                  Etant donné la distance des serveurs hébergeant mai-ko.com (Japon), le temps de réponse est un peu long.
+                  time=500
+               </li>
+               <li>
+                  Faire de même avec la machine forax.github.io qui héberge le cours (whois + ping)
+               </li>
+               <li>
+                  Que pouvez vous en déduire (regarder le temps du ping et aussi le ttl) ? <br>
+                  Le temps de réponse est plus courts que pour le site de mai-ko.com
+                  time=90
+               </li>
+            </ul>
+         </li>
+      </ol>
+      <h2>Exercice 3 - Service HTTP</h2>
+      <p> On va faire quelques requêtes HTTP à la main pour voir comment le protocole HTTP marche. </p>
+      <ol>
+         <li>
+            On cherche à savoir à quoi correspond le fichier /etc/services. Pour cela, dans le terminal tapez la commande man services <br>
+            Le fichier services correspond à l'affectation des ports UDP et TCP sur les différents services installés sur la machine
+         </li>
+         <li>
+            Utilisez la commande grep sur le fichier /etc/services pour déterminer le numéro du port TCP correspondant au service http. 
+            <pre>cat /etc/services | grep http</pre>
+            Il s'agit du numéro de port TCP 80
+         </li>
+         <li>
+            Maintenant que l'on sait quel est le numéro de port TCP de HTTP,
+            utilisez <!-- <tt> -->nc<!-- </tt> --> pour vous connecter au serveur Web de la machine <!-- <tt> -->www.example.com<!-- </tt> -->
+            en utilisant le port TCP correspondant au protocole HTTP puis tapez la requête suivante : (commande "<!-- <tt> -->nc www.example.com 80<!-- </tt> -->")
+            <pre>     GET / HTTP/0.9
+	 			</pre>
+            Puis ajouter deux retours à la ligne (RETURN, ENTER, etc)
+            <br>
+            Quel est le <!-- <tt> -->header<!-- </tt> --> (l'entête, en français) de la réponse ?
+            <br>
+            <pre>
+	 				HTTP/1.0 505 HTTP Version Not Supported
+	 				Content-Type: text/html
+	 				Content-Length: 379
+	 				Connection: close
+	 				Date: Wed, 30 Nov 2022 18:57:55 GMT
+	 				Server: ECSF (nyb/1D35)
+	 			</pre>
+            <br>
+            Note: le serveur envoie une réponse composée de deux parties, séparées par une ligne vide :
+            <ul>
+               <li>
+                  le <!-- <tt> -->header<!-- </tt> --> qui est ce qui nous intéresse pour le moment,
+               </li>
+               <li>
+                  puis le contenu HTML de la page Web, à laquelle nous nous intéresserons plus tard.
+               </li>
+            </ul>
+         </li>
+         <li>
+            A quoi correspondent les 3 valeurs sur la première ligne de l'entête ? <br>
+            <ul>
+               <li> La première ligne correspond au code de retour de la requête que nous a fourni le serveur (ici 505 signifiant que le site ne supporte pas html 0.9)</li>
+               <li>La seconde ligne correspond au type de ressource reçu, ici du texte au format html</li>
+               <li>La troisième ligne correspond à la taille de ce qui a été envoyé en octets</li>
+            </ul>
+         </li>
+         <li>
+            A quoi correspond la valeur de <!-- <tt> -->Content-Type<!-- </tt> --> ? 
+            <br> La valeur Content-Type correspond à l'attribut désignant le type et le format de la ressource reçu par le client
+         </li>
+         <li>
+            A quoi correspond la valeur de <!-- <tt> -->Content-Length<!-- </tt> --> ? 
+            <br> La valeur Content-Lenght correspond à l'attribut désigant le nombre d'octet contenu par la ressource reçu par le client.
+         </li>
+         <li>
+            Faites la même analyse mais avec la requête
+            <pre>     
+	 				GET / HTTP/1.1
+	 				Host: www.example.com
+	 			</pre>
+            Le résultat de la requête est différent, ici le code de retour est 200 OK, ce qui veux dire que la requête est un succès
+            <br>
+            <pre>
+	 				HTTP/1.1 200 OK
+					Age: 580463
+					Cache-Control: max-age=604800
+					Content-Type: text/html; charset=UTF-8
+					Date: Thu, 01 Dec 2022 11:29:58 GMT
+					Etag: "3147526947+ident"
+					Expires: Thu, 08 Dec 2022 11:29:58 GMT
+					Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+					Server: ECS (dcb/7F82)
+					Vary: Accept-Encoding
+					X-Cache: HIT
+					Content-Length: 1256
+         </li>
+         <li>
+            Pourquoi dans la version 1.1 du protocole HTTP, on doit fournir le <!-- <tt> -->Host<!-- </tt> --> ?
+            <br> Car la spécification de la version 1.1 impose d'ajouter le champs host correspondant au nom de domaine du site ciblé par la requête.
+         </li>
+         <li>
+            Enfin, sur la machine <!-- <tt> -->www.forax.org<!-- </tt> -->, faite la requête suivante et analysé la réponse
+            <pre>    
+	 				GET / HTTP/1.1
+	 				Host: www.forax.org
+	 			</pre>
+            <br>
+            À quoi correspond la valeur de <!-- <tt> -->Location<!-- </tt> --> ?
+            <br> La valeur location correspond à l'endroit où est hébergé le serveur.	
+         </li>
+      </ol>
+      <h2>Exercice 3 - Service HTTP</h2>
+      <p> On va faire quelques requêtes HTTP à la main pour voir comment le protocole HTTP marche. </p>
+      <ol>
+         <li>
+            Changer votre compte rendu pour que chaque question / réponse de votre compte-rendu soient
+            numéroter automatiquement en utilisant les balises <!-- <tt> -->OL<!-- </tt> --> / <!-- <tt> -->LI<!-- </tt> -->.
+         </li>
+         <li>
+            Au début de votre compte rendu, on va ajouter un cartouche indiquant votre nom, votre formation,
+            et le numéro du TP et le nom de la matière sous forme d'une table HTML.
+            <br>
+            En ascii-art, cela donne
+            <pre>     
+	 				-----------------------------------------
+	 				|              | MICHEL PREFERERESTBASH |
+	 				-----------------------------------------
+	 				| ESIPE INFO 1 |                        |
+	 				-----------------------------------------
+	 				| TP 1 de Programmatio Web              |
+	 				-----------------------------------------
+	 			</pre>
+            On veut un rendu le plus identique possible.
+            <br>
+            On peut noter que la dernière ligne est sur 2 colonnes, allez chercher dans la spécification du
+            <a href="https://www.w3.org/TR/html5/">Standard HTML5</a>
+            comment faire et indiquer dans votre compte rendu comme vous avez fait pour trouver la réponse
+            et où elle se situe dans le document (oui, je sais c'est en Anglais, mais vous êtes grand maintenant).
+            <br>
+            La spécification pour faire des tables en HTML5 se situe <a href="https://html.spec.whatwg.org/multipage/edits.html#edits-and-tables">ici</a>
+         </li>
+         <li>
+            Vérifier que votre compte-rendu passe bien le validateur de HTML
+            <a href="https://validator.w3.org/">validateur du W3c</a>
+            <br>
+            Si ce n'est pas le cas, modifier le HTML !
+         </li>
+      </ol>
+      <h2> Conclusion personnel </h2>
+      <p>
+         En conclusion personnel, je peux dire que ce TP m'a fait comprendre l'importance de la spécification du HTML (et du validateur HTML) pour avoir un code propre. Il m'a aussi appris à faire plus attention au tag que j'utilise, c'est-à-dire les fermer dans le bonne ordre, les placer au bon endroit, leur réel intérêt...
+         La partie réseau du TP complète nos connaissances lié au cours de réseau sur le protocole HTTP.
+      </p>
+   </body>
+</html>
