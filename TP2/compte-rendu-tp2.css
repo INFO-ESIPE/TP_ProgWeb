@@ -1,0 +1,46 @@
+/*Exercice 2.1*/
+h1 {
+   font-size:24px;
+}
+h2 {
+   font-size:20px;
+   color:lightgray;  
+}
+
+/*Exercice 2.2*/
+.roman-list {
+   list-style-type:upper-roman;
+}
+
+
+
+.movie-list
+{
+   width:100%;
+}
+
+.movie-list td
+{
+   padding:8px;
+}
+
+/* Exercice 2.5*/
+.movie-title
+{
+  font-variant: small-caps;
+}
+
+/* Exercice 2.8*/
+.movie-list tr:nth-child(even) {
+   background-color:lightgreen;
+}
+
+/* Exercice 2.9*/
+.movie-list tr:hover {
+   background-color:#12202D; /*rgb(18,32,43)*/
+}
+
+.answer
+{
+   font-weight: bold;
+}

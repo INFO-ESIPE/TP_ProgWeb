@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="compte-rendu-tp2.css">
+      <title>Compte Rendu de TP2</title>
+      <style>
+         /* Exercice 1.2*/
+         body {
+         font-family: sans-serif;
+         }
+         /* Exercice 1.3*/
+         /*
+         h1 {
+         font-size:24px;
+         }
+         h2 {
+         font-size:20px;
+         color:lightgray;  
+         }
+         */
+         h3 {
+         font-size:18px;
+         }
+         /* Exercice 1.5*/
+         .centered {
+         text-align: center;
+         }
+         /* Exercice 1.6*/
+         .right {
+         text-align: right;
+         }
+         /* Exercice 1.7*/
+         .link {
+         font-weight:bold;
+         }
+         .link:hover {
+         color:teal;
+         font-weight:normal;
+         }
+      </style>
+   </head>
+   <body>
+      <h1 class="centered">Compte Rendu de TP2</h1>
+      <div class="right">MAX DUCOUDRÉ</div>
+      <p>
+         ESIPE INFO 1 <br>              
+         TP 2 de Programmation Web 
+      </p>
+      <h2 style="color: firebrick;">Exercice 1 - Style de base</h2>
+      <!-- Exercice 1.1-->
+      <p>Un petit exercice pour voir comment appliquer des styles s'appuyant sur les balises du document.</p>
+      <ol class="roman-list">
+         <li>
+            Ajoutez en utilisant la balise &lt;h2&gt; le titre de l'exercice courant puis ajoutez à la balise
+            <tt>h2</tt> un attribut <tt>style</tt> qui permet de mettre le titre de l'exercice en rouge brique.
+         </li>
+         <li>
+            Déclarez une balise <tt>style</tt> à l'intérieur des balises <tt>head</tt> du document,
+            puis faites en sorte que tout le document utilise une police sans-serif.
+         </li>
+         <li>
+            Faites en sorte que la balise h1 corresponde à une police de 24 points,
+            la balise h2 à une police de 20 points et la balise h3 à une police 18 points.
+         </li>
+         <li>
+            Faites en sorte que les balises <tt>h2</tt> soient affichées en gris clair (<tt>lightgray</tt>),
+            à part le titre de cet exercice (qui doit rester en rouge brique).
+         </li>
+         <li>
+            Faites en sorte que le titre du compte rendu de TP soit centré.
+            <br>
+            Pour cela, vous allez créer une classe <tt>"centered"</tt> et ajouter un attribut <tt>class</tt>
+            à la balise englobant le titre du compte rendu. Déclarez ensuite que le style pour la classe <tt>"centered"</tt>
+            est centré.
+         </li>
+         <li>
+            On veut que votre nom soit aligné à droite. Commencez par déclarer votre nom entre des balises <tt>div</tt>
+            puis ajoutez une classe <tt>right</tt> permettant d'aligner le texte à droite.
+         </li>
+         <li>
+            Ajoutez un lien vers le cours
+            <a class="link" href="http://forax.github.io/course/progweb/">http://forax.github.io/course/progweb/</a>
+            puis faites en sorte que le lien soit en gras si la souris n'est pas sur le lien
+            et en <i>teal</i> si la souris survole le lien.
+            <br>
+            Conseil: Vous utiliserez pour cela les pseudo-classes des liens.
+         </li>
+      </ol>
+      <h2>Exercice 2 - Style de liste et de table</h2>
+      <p>Cet exercice propose de changer le style d'une liste et d'une table.</p>
+      <ol class="roman-list">
+         <li>
+            On veut maintenant créer une feuille de style externe, c'est-à-dire une feuille de style déclarée non
+            pas à l'intérieur de <tt>compte-rendu-tp2.html</tt> mais dans un fichier externe nommé <tt>compte-rendu-tp2.css</tt>.
+            <br>
+            Modifiez votre travail pour que le compte rendu utilise ce fichier de style.
+            <br>
+            Testez le fichier <tt>compte-rendu-tp2.css</tt> en mettant en commentaire les styles correspondant à h1 et h2 dans
+            le fichier  <tt>compte-rendu-tp2.html</tt> et recopiez ceux-ci dans <tt>compte-rendu-tp2.css</tt>.
+         </li>
+         <li>
+            Pour la suite du TP, nous ne modifierons plus la balise style du compte rendu mais le fichier <tt>compte-rendu-tp2.css</tt>
+            <br>
+            Faites en sorte que la liste des questions de cet exercice et de l'exercice précédent utilise les chiffres romains
+            (en majuscule) plutôt que les traditionnels chiffres 1, 2, 3, etc.
+         </li>
+         <li>
+            Le site <a href="https://en.wikipedia.org/wiki/List_of_2021_box_office_number-one_films_in_the_United_States">https://en.wikipedia.org/wiki/List_of_2021_box_office_number-one_films_in_the_United_States</a>
+            contient un tableau des films au box office.
+            <br>
+            On souhaite recopier les données (en fait, uniquement le rang, le titre du film et les recettes actuelles (<tt>Gross</tt>)
+            pour les 5 films ayant rapporté le plus d'argent (il y a des flèches pour trier) pour les mettre dans une table dont nous allons changer l'aspect.
+            <br>
+            Donc dans un premier temps, créez la table HTML en utilisant les balises <tt>table</tt>, <tt>th</tt> et <tt>td</tt>
+            dans votre compte rendu.
+         </li>
+         <li>
+            Faites en sorte que la table occupe toute la largeur du compte rendu.
+         </li>
+         <li>
+            Centrez les titres et changer la police de caractères des titres pour utiliser des petites majuscules (<tt>small caps</tt>).
+         </li>
+         <li>
+            Aérez la table avec la propriété <tt>padding</tt> pour que le texte ne soit
+            pas collé aux bordures.
+         </li>
+         <li>
+            Faites en sorte que les valeurs des deux premières colonnes (rang et titre) soient alignées à gauche et
+            que les valeurs de la dernière colonne soient centrées. 
+         </li>
+         <li>
+            Changez la couleur de fond des lignes paires (<tt>even</tt>) pour mettre
+            du vert clair en utilisant la pseudo-classe <tt>:nth-child</tt>.
+         </li>
+         <li>
+            Faites en sorte que si l'on survole une ligne avec la souris
+            la couleur du fond corresponde
+            à 18 sur 255 de rouge, 32 sur 255 de vert et 43 sur 255 de bleu en utilisant un codage
+            hexadécimal.
+            <br>
+            Note: 26 en décimal correspond à 1A en hexadecimal car pour les dizaines, 26 / 16 = 1, et pour les unités 26 - 1 * 16 = 10 (qui s'écrit 'A').
+         </li>
+      </ol>
+      <!--Tableau pour l'exercice 2.3, 2.4, 2.5, 2.6, 2.7, 2.8 & 2.9 -->
+      <table class="movie-list">
+         <thead>
+            <tr>
+               <th>Rank</th>
+               <th>Title</th>
+               <th>Gloss</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>#1</td>
+               <td class="movie-title">Wonder Woman 1984</td>
+               <td class="centered">$5,429,210</td>
+            </tr>
+            <tr>
+               <td>#2</td>
+               <td class="movie-title">The Marksman</td>
+               <td class="centered">$3,104,204</td>
+            </tr>
+            <tr>
+               <td>#3</td>
+               <td class="movie-title">The Little Things</td>
+               <td class="centered">$4,705,527</td>
+            </tr>
+            <tr>
+               <td>#4</td>
+               <td class="movie-title">The Croods: A New Age</td>
+               <td class="centered">$2,079,825</td>
+            </tr>
+            <tr>
+               <td>#5</td>
+               <td class="movie-title">Tom & Jerry</td>
+               <td class="centered">$14,112,629</td>
+            </tr>
+         </tbody>
+      </table>
+      <h2>Exercice 3 - Vignettes</h2>
+      <p>Pour ce premier exercice, on souhaite afficher des images d'animaux sous forme de vignettes.
+         Pour cette exercice et l'exercice suivant, vous ne devez pas modifier le compte rendu pour l'affichage de l'exercice mais utiliser le fichier exo3.html.
+      </p>
+      <ol>
+         <li>
+            Récupérez les 6 images d'animaux ainsi que le fichier <tt>exo1.html</tt>
+            dans ce <a href="https://monge.univ-mlv.fr/ens/IR/IR1/2022-2023/ProgWeb/src/td02/">répertoire</a>.
+            <br>
+            Le fichier <a href="https://monge.univ-mlv.fr/ens/IR/IR1/2022-2023/ProgWeb/src/td02/resultat.png">resultat.png</a> correspond à l'affichage que l'on souhaite avoir
+            à la fin de cet exercice.
+            <br>
+            Vérifiez que les images s'affichent correctement lorsque vous visualisez le document.
+            <br>
+            <b>Note:</b> Le jeu est d'arriver à écrire le CSS sans changer le HTML,
+            si vous avez du mal, vous avez le droit d'ajouter des classes, mais pas de faire
+            d'autres modifications de la partie HTML.
+         </li>
+         <li>
+            Faites en sorte que toutes les images à l'intérieur des boites (pas les autres) aient une largeur (<b>width</b>) de 220 pixels.
+            <br>
+            Note: on suppose aue l'on peut ajouter des images pas dans les boites par la suite.
+         </li>
+         <li>
+            Au lieu d'afficher les images verticalement, on souhaite les afficher horizontalement.
+            <br>
+            Utilisez pour cela l'attribut <b>float</b>.
+         </li>
+         <li>
+            Que se passe-t-il si l'on fait varier la taille de la fenêtre du navigateur horizontalement ? 
+            <br><span class="answer">Si on réduit la taille de la fenêtre, les blocks float vont à la ligne quand la fenêtre n'est pas assez grande pour les placer sur une seule ligne horizontale.</span> 
+         </li>
+         <li>
+            Vérifiez que vous pouvez aussi mettre toutes les images à droite en changeant juste un mot dans la partie CSS du document.
+            <br>
+            Puis remettez les images alignées à gauche.
+         </li>
+         <li>
+            Faites en sorte que les titres (animal1, animal2, etc.) soient affichés en blanc sur fond noir et soient centrés horizontalement par rapport à la boite qui les contient.
+            <br>
+            Jouez de plus avec la propriété <b>padding</b> pour avoir un espacement convenable.
+         </li>
+         <li>
+            Espacez les unes des autres les boites contenant les images avec la propriété <b>margin</b>.
+         </li>
+         <li>
+            Faites en sorte que les images à l'intérieur des boites aient une bordure d'un pixel de largeur de couleur <b>#aaaaaa</b>.
+         </li>
+         <li>
+            Changez l'opacité (propriété <b>opacity</b>) lorsque l'utilisateur passe sa souris au-dessus d'une image dans une boite.
+         </li>
+         <li>
+            Faites en sorte que les titres soient accolés par le bas à l'image et mordent légèrement sur l'image (de 5 pixels par exemple).
+            <br>
+            Note: l'idée est de placer la boite contenant le texte relativement par rapport à la boite contenant l'image.
+         </li>
+      </ol>
+      <h2>Exercice 4 - Barre de menu</h2>
+      <p>Cet exercice propose d'afficher une liste HTML (ul/li) sous forme d'une barre de menu horizontal. Comme base de travail vous allez utiliser le fichier exo4.html présent dans le même répertoire que l'exercice précédent.
+      </p>
+      <ol>
+         <li>
+            Faites en sorte que la liste ait une <b>position</b> fixe, en haut à gauche de la partie affichage du navigateur.  
+         </li>
+         <li>
+            Retirez le style par défaut des items de liste (avec <b>list-style-type</b>) pour qu'il n'y ait pas de style par défaut.
+         </li>
+         <li>
+            Affichez les items en gras et avec une police Courrier (ou sinon serif).
+         </li>
+         <li>
+            Faites en sorte que les items soient affichés horizontalement collés à gauche et non plus verticalement.
+         </li>
+         <li>
+            Faites en sorte que les items aient une largeur de 120 pixels et ajoutez un espacement d'une dizaine de pixel entre les items.
+         </li>
+         <li>
+            Changez le fond du menu pour qu'il soit de couleur bleu tirant sur le vert (<tt>teal</tt>),
+            puis en chantant yellow submarine, changez la couleur des items pour qu'ils soient en jaune.
+         </li>
+         <li>
+            Fixez la hauteur (<b>height</b>) du menu à 48 pixels puis faites en sorte que le menu occupe toute la largeur (<b>width</b>).
+         </li>
+         <li>
+            Faites en sorte d'avoir un item 'Help' soit affiché à droite de la barre de menu.
+         </li>
+         <li>
+            Affichez une ligne de 2 pixels en bas du menu.
+            <br>
+            L'astuce est de mettre une bordure de 2 pixels seulement en bas.
+         </li>
+      </ol>
+
+      <h2>Exercice 5 - Faire un sous-menu (Optionnel)</h2>
+      <p>Décommentez dans le HTML la partie qui affiche un sous-menu. L'idée est d'afficher ce sous-menu lorsque la souris survole l'item 'Web'.
+      </p>
+      <ol>
+    <li>
+     Positionnez le sous-menu juste en dessous de l'item web (avec <tt>relative/absolute</tt>).
+    </li>
+<li>
+     Utilisez la propriété <tt>display</tt> pour ne pas afficher le sous-menu par défaut.
+    </li>
+<li>
+     Faites en sorte d'afficher le sous-menu si l'on passe la souris sur l'item 'Web'.
+    <br>
+     L'astuce est d'avoir un sélecteur CSS qui correspond à la liste à l'intérieur de l'item Web si celui-ci est survolé par la souris
+     et de lui appliquer la propriété <tt>display</tt> à <tt>block</tt>.
+    </li>
+<li>
+     N'oubliez pas de jouer avec la propriété <tt>z-index</tt> pour mettre le sous menu au-dessus du reste de la page.
+    </li>
+<li>
+     Vous pouvez maintenant vous amuser à rendre le menu plus beau, par exemple, en mettant une ombre portée,
+     des coins ronds ou d'autres effets de votre choix.
+    </li>
+   </ol>
+
+
+      <h2> Conclusion personnel </h2>
+      <p>
+      </p>
+   </body>
+</html>
