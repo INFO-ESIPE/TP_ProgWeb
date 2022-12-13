@@ -10,9 +10,7 @@ h2 {
 /*Exercice 2.2*/
 .roman-list {
    list-style-type:upper-roman;
-}
-
-
+}  
 
 .movie-list
 {
@@ -25,7 +23,7 @@ h2 {
 }
 
 /* Exercice 2.5*/
-.movie-title
+th
 {
   font-variant: small-caps;
 }
