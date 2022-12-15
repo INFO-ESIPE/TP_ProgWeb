@@ -1,3 +1,8 @@
+/* 
+    TP 3 de Programmation Web 
+    Auteur : Max Ducoudré - INFO1
+*/
+
 /*Fonction dessinant une horloge sur un canvas en fonction de l'heure*/
 function refresh(canvas, context) {
 
