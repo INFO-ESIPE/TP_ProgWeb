@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)https://monge.univ-mlv.fr/ens/IR/IR1/2022-2023/ProgWeb/src/td04/treasure2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <style>
+    div.row {
+      clear: both;
+    }
+    div.row div {
+      padding: 5px;
+      margin: 2px;
+      width: 20px;
+      background-color: lightgray; 
+      float: left;
+    }
+
+    div .found {
+      background-size: cover;
+      background-image: url("sand-chest.png");
+    }
+
+    div .unrevealed {
+      background-size: cover;
+      background-image : url("sand.png");
+    }
+
+    div .not-found {
+      background-size: cover;
+      background-image : url("sand-hole.png");
+    }
+
+  </style>
+  <script>
+    "use strict";
+    
+    class GameState {
+      constructor(treasureCount, gridSize) {
+        this.treasures = [];
+        for(let i = 0; i < treasureCount; i++) {
+          this.treasures[Math.floor(Math.random() * gridSize) + "x" + Math.floor(Math.random() * gridSize)] = true;
+        }
+      }
+
+      findTreasure(x, y) {
+        return this.treasures[x + "x" + y];
+      }
+    }
+    
+    let gridSize = 8;
+    let gameState = new GameState(10, gridSize); 
+    //console.log(gameState);
+    window.onload = function() {
+
+      let game = document.getElementById("game");
+      for(let i = 0; i < gridSize; i++) {
+
+        /* Création de l'élément DOM d'une ligne */
+        let row = document.createElement("DIV");
+        row.classList.add("row");
+        
+        for(let j = 0; j < gridSize; j++) {
+
+          /* Création de l'élément DOM d'une cellule */
+          let cell = document.createElement("DIV");
+          cell.innerText = i * gridSize + j;
+          cell.classList.add("unrevealed");
+
+          /* Evènement de clique de l'utilisateur*/
+          cell.onclick = () => {
+
+            /* Gestion des images de fond des cellules*/
+            cell.classList.remove("unrevealed");
+            if(gameState.findTreasure(i, j)) {
+              cell.classList.add("found");
+            } else {
+              cell.classList.add("not-found");
+            }
+
+            /* Redéfinition de onclick lorsque l'utilisateur clique une fois*/
+            cell.onclick = () => {
+              console.log("Cell already revealed !");
+            }
+          }
+
+          row.appendChild(cell);
+        }
+        game.appendChild(row);
+      }
+    };
+  </script>
+</head>
+<body>
+  <h2>Treasure Map (2)</h2>
+  <div id="game">
+  </div>
+</body></html>

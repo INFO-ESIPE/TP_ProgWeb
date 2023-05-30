@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Compte Rendu de TP4</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        
+        code {
+            display: block;
+            background-color: #f7f7f7;
+            color: #333;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre;
+            tab-size: 2;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Compte Rendu de TP4 - Programmation Web</h1>
+    <h2> Max Ducoudré </h2>
+    
+    <h3>Exercice 1 - Treasure Map</h3>
+    <p>
+        <b>
+            1. Recopiez la page Web treasure1.html.
+            Qu'affiche le jeu sur la console ? Est-ce le résultat attendu ? Comment corriger ce problème ?
+        </b>
+        <br>
+        La console affiche "null" puis "onload !"
+        Le javascript tente de récupérer l'élément HTML ayant pour id "game" puis l'affiche en console. On obtient null car ce code s'exécute avant le chargement de l'arbre DOM. Pour résoudre ce problème, il faut placer ce code dans la fonction "onload" de "window" 
+        <code class="language-javascript">
+            window.onload = function() {
+                console.log("onload !");
+                
+                let game = document.getElementById("game");
+                console.log(game);
+            };
+        </code>
+        
+    </p>
+    <p>
+        <b>
+            2. On souhaite parcourir chaque ligne de la grille et chaque case de la grille en utilisant une boucle sur chaque ligne et une boucle sur chaque case d'une ligne.
+        </b>
+        <br>
+        <code class="language-javascript">
+            for(var i = 0; i &lt; game.children.length; i++ ) {
+                for(var j = 0; j &lt; game.children[i].children.length; j++) {
+                    console.log("Cell[" + i + ", " + j + "] = " + game.children[i].children[j]);
+                }
+            }
+        </code>
+    </p>
+    <p>
+        <b>
+            3. Au lieu de faire des boucles, on souhaite utiliser la méthode forEach définie sur les tableaux.
+        </b>
+        <br>
+        On ne peux pas utiliser la méthode forEach sur les "children" de "game" car ils sont de type "HTMLCollection" provenant du CPP (qui n'a pas de méthode forEach).
+        La fonction Array.from vas nous permettre de convertir un HTMLCollection en tableau javascript, et donc de pouvori utiliser la méthode forEach.
+        <code class="language-javascript">
+            Array.from(game.children).forEach(function(row, i) {
+                Array.from(row.children).forEach(function(cell, j) {
+                    console.log("Cell[" + i + ", " + j + "] = " + cell);
+                });
+            });
+        </code> 
+    </p>
+    <p>
+        <b>
+            4. Modifier le code pour afficher la case et les coordonnées uniquement si l'utilisateur clique sur la case.
+        </b>
+        <br>
+        Pour ce faire, on vas modifier le champs "onclick" de chaque case pour lui passer une fonction qui vas afficher la case plutôt que de directement afficher la case dans la boucle.
+        <code class="language-javascript">
+            Array.from(game.children).forEach(function(row, i) {
+                Array.from(row.children).forEach(function(cell, j) {
+                    cell.onclick = () => {
+                        console.log("Cell[" + i + ", " + j + "] = " + cell);
+                    }
+                });
+            });
+        </code>
+    </p>
+    <p>
+        <b>
+            5. Commenter le code précédent et décommenter le code avec les deux boucles et ajouter la detection des clicks de l'utilisateur.
+        </b>
+        <br>
+        Si on utilise var pour ces deux boucles, dans la définition de onClick, la valeure de i et j sera à 8 car var est déclarée au début de la fonction et non uniquement dans la boucle.
+        Pour corriger cela, on utilise la technique IIFE pour "encapsuler" la définition de onclick dans une autre fonction en lui passant en paramètre i et j; 
+        <code class="language-javascript">    
+            for(var i = 0; i &lt; game.children.length; i++ ) {
+                for(var j = 0; j &lt; game.children[i].children.length; j++) {
+                    (function(i, j) {
+                        game.children[i].children[j].onclick = () => {
+                            console.log("Cell[" + i + ", " + j + "] = " + game.children[i].children[j]);
+                        }
+                    })(i, j);
+                }
+            }
+        </code>
+    </p>
+    <p>
+        <b>
+            7. Bien revenons au jeu, on veut cacher des trésors sur la grille et lorsque l'utilisateur clique sur un DIV découvrir s'il y a un trésor ou pas sur cette case.
+        </b>
+        <br>
+        Fonction createTreasures : 
+        <code class="language-javascript">
+            function createTreasures() {
+                let treasures = [];
+                for(let i = 0; i &lt; 8; i++) {
+                    treasures.push({
+                        row: Math.floor(Math.random() * 8),
+                        col: Math.floor(Math.random() * 8),
+                    });
+                }
+                return treasures;
+            }      
+        </code>
+        Fonction findTreasure apellé dans le onclick de chaque cellules : 
+        <code class="language-javascript">
+            function findTreasure(treasures, x, y) {
+                return treasures.filter(t => t.row == x && t.col == y).length > 0 ? true : false;
+            }
+        </code>
+    </p>
+    <p>
+        <b>
+            8. Il ne nous reste plus qu'à changer la couleur du background en fonction de la valeur de retour de findTreasure. Pour cela, il suffit de changer la valeur background-color du style du nœud DOM correspond.
+        </b>
+        <br>
+        Pour éviter de pouvoir cliquer 2 fois sur la même cellule, nous avons un tableau 'revealed' qui se rempli d'objets ayant les champs "row" et "col" à chaque fois que l'utilisateur clique sur une div. 
+        Il suffit ensuite de vérifier, au début de la fonction "onclick" du div, si sa ligne/collonne sont dans le tableau revealed.
+        
+        Si l'utilisateur n'a effectivement pas cliqué sur la cellule, alors on change la couleur de fond de la cellule en chageant son champ "style.backgroundColor" en fonction du résultat de "findTreasure"
+        <code class="language-javascript">
+            cell.onclick = () => {
+                if(revealed.filter(c => c.row == i && c.col == j).length > 0) {
+                    console.log("Cell already revealed !");
+                    return;
+                }
+                cell.style.backgroundColor = findTreasure(treasures, i, j) ? "green" : "red";
+                revealed.push({row:i, col:j});
+            }
+        </code>
+    </p>
+    
+    <h3>Exercice 2 - Treasure Map (2)</h3>
+    <p>
+        La classe GameState permet d'initialiser et de contenir les données sur l'emplacement des trésors :
+    </p>
+    <code class="language-javascript">
+        class GameState {
+            constructor(treasureCount, gridSize) {
+                this.treasures = [];
+                for(let i = 0; i &lt; treasureCount; i++) {
+                    this.treasures[Math.floor(Math.random() * gridSize) + "x" + Math.floor(Math.random() * gridSize)] = true;
+                }
+            }
+            
+            findTreasure(x, y) {
+                return this.treasures[x + "x" + y];
+            }
+        }
+    </code>
+    <p>
+        Ici, pour savoir si un emplacement contient un trésor ou non, on utilise pas la méthode "filter", mais on recherche directement depuis une clé, ce qui réduit la complexité à O(1).
+        Une clé ici correspond à "collonnexline" (ex : 3x4).
+        De plus, le constructeur créer et rempli automatiquement le tableau contenant l'emplacement aléatoire des trésors en fonction de deux paramètres.
+    </p>
+    <p>
+        Pour la gestion des images de fond des cellules, il y a trois classes différentes pour les trois status possible d'une cellule. Par défaut, une classe "unrevealed" est appliqué aux cellules. Lorsqu'un utilisateur clique sur une cellule, cette classe se retire et est remplacée par "not-found" ou par "found" en fonction du résultat de "findTreasure".
+    </p>
+    <code class="language-javascript">
+        /* Création de l'élément DOM d'une cellule */
+        let cell = document.createElement("DIV");
+        cell.innerText = i * gridSize + j;
+        cell.classList.add("unrevealed");
+        
+        /* Evènement de clique de l'utilisateur*/
+        cell.onclick = () => {
+            /* Gestion des images de fond des cellules*/
+            cell.classList.remove("unrevealed");
+            if(gameState.findTreasure(i, j)) {
+                cell.classList.add("found");
+            } else {
+                cell.classList.add("not-found");
+            }
+            
+            /* Redéfinition de onclick lorsque l'utilisateur clique une fois*/
+            cell.onclick = () => {
+                console.log("Cell already revealed !");
+            }
+        }
+    </code>
+</body>
+</html>

@@ -11,27 +11,27 @@
     <h2>Exercice 1 - Horloge</h2>
     <p>Le but de cet exercice est d'utiliser l'API des canvas en réalisant une horloge à aiguilles.</p>
     <ol>
-      <li> Recopiez la page Web <a href="src/td03/exo1.html">exo1.html</a>. <br> Que se passe-t-il lorsque l'on la visualise ? <br> Note: regardez la console ! <br> Expliquez ce que fait <code>window.onload = loaded</code> puis <code>window.secodeimeout(refresh, 1000)</code> ? Pour cela, chercher dans la documentation sur le <a href="hcodeps://developer.mozilla.org/en-US/">Mozilla Developer Network</a>. <p class="answer"> Lorsqu'on visualise la page, "tick !" s'affiche à la console après une seconde. <br> window.onload est une fonction appellé lorsque l'arbre DOM a finit de charger. <br> window.secodeimeout(refresh, 1000) est une fonction permecodeant d'appeller la fonction "refresh" en première argument après 1000 milisecondes passé en second argument. </p>
+      <li> Recopiez la page Web <a href="src/td03/exo1.html">exo1.html</a>. <br> Que se passe-t-il lorsque l'on la visualise ? <br> Note: regardez la console ! <br> Expliquez ce que fait <code class="language-javascript">window.onload = loaded</code> puis <code class="language-javascript">window.secodeimeout(refresh, 1000)</code> ? Pour cela, chercher dans la documentation sur le <a href="hcodeps://developer.mozilla.org/en-US/">Mozilla Developer Network</a>. <p class="answer"> Lorsqu'on visualise la page, "tick !" s'affiche à la console après une seconde. <br> window.onload est une fonction appellé lorsque l'arbre DOM a finit de charger. <br> window.secodeimeout(refresh, 1000) est une fonction permecodeant d'appeller la fonction "refresh" en première argument après 1000 milisecondes passé en second argument. </p>
       </li>
-      <li> Il existe un appel <code>window.setInterval()</code> qui va appeler la fonction pris en paramètre de façon répétée. Transformez le code pour utiliser <code>window.setInterval()</code>. <p class="answer"> On remplace window.setTimeout(refresh, 1000) par window.setInterval(refresh, 1000) </p>
+      <li> Il existe un appel <code class="language-javascript">window.setInterval()</code> qui va appeler la fonction pris en paramètre de façon répétée. Transformez le code pour utiliser <code class="language-javascript">window.setInterval()</code>. <p class="answer"> On remplace window.setTimeout(refresh, 1000) par window.setInterval(refresh, 1000) </p>
       </li>
-      <li> Transformez le code pour afficher la date courante avec <code>new Date()</code>. <p class="answer"> Il faut ajouter la ligne <code>console.log(new Date())</code> dans la fonction <code>refresh()</code>
-        </p> Puis changez encore le code pour afficher l'heure ( <code>getHours()</code>), les minutes ( <code>getMinutes()</code>) et les secondes ( <code>getSeconds()</code>) sur la console. <p class="answer"> J'ajoute les lignes suivantes : <code>
+      <li> Transformez le code pour afficher la date courante avec <code class="language-javascript">new Date()</code>. <p class="answer"> Il faut ajouter la ligne <code class="language-javascript">console.log(new Date())</code> dans la fonction <code class="language-javascript">refresh()</code>
+        </p> Puis changez encore le code pour afficher l'heure ( <code class="language-javascript">getHours()</code>), les minutes ( <code class="language-javascript">getMinutes()</code>) et les secondes ( <code class="language-javascript">getSeconds()</code>) sur la console. <p class="answer"> J'ajoute les lignes suivantes : <code class="language-javascript">
             <br> let date = new Date(); <br> console.log(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()); <br>
           </code>
         </p>
       </li>
-      <li> Dans la fonction flèche associer à <code>window.onload</code>, récupérer le canvas à partir de son <code>id</code> et récupérer le context associé. <p class="answer"> J'ajoute les lignes <code>
+      <li> Dans la fonction flèche associer à <code class="language-javascript">window.onload</code>, récupérer le canvas à partir de son <code class="language-javascript">id</code> et récupérer le context associé. <p class="answer"> J'ajoute les lignes <code class="language-javascript">
             <br> let canvas = document.getElementById("clock"); <br> let context = canvas.getContext("2d"); <br>
-          </code> pour récupérer le canvas et son contexte 2d </p> Passer le canvas et le context en paramètre de la fonction <code>refresh</code> et dans <code>refresh</code> afficher sur la console la largeur ( <code>width</code>) et la hauteur ( <code>height</code>) du canvas. <p class="answer"> Pour ajouter canvas et context à la fonction refresh, j'ajoute deux arguments à la focntion refresh et je les ajoutes au setInterval : <code>
+          </code> pour récupérer le canvas et son contexte 2d </p> Passer le canvas et le context en paramètre de la fonction <code class="language-javascript">refresh</code> et dans <code class="language-javascript">refresh</code> afficher sur la console la largeur ( <code class="language-javascript">width</code>) et la hauteur ( <code class="language-javascript">height</code>) du canvas. <p class="answer"> Pour ajouter canvas et context à la fonction refresh, j'ajoute deux arguments à la focntion refresh et je les ajoutes au setInterval : <code class="language-javascript">
             <br> window.setInterval(refresh, 1000, canvas, context); <br>
           </code>
-        </p> Enfin, modifier la fonction <code>refresh</code> pour afficher une aiguille indiquant midi (ou 0 minute, ou 0 seconde). <p class="answer"> J'ajoute dans la fonction refresh pour dessiner une aiguille : <code>
+        </p> Enfin, modifier la fonction <code class="language-javascript">refresh</code> pour afficher une aiguille indiquant midi (ou 0 minute, ou 0 seconde). <p class="answer"> J'ajoute dans la fonction refresh pour dessiner une aiguille : <code class="language-javascript">
             <br> context.beginPath(); <br> context.strokeStyle = "black"; <br> context.moveTo(canvas.width/2, canvas.height/2); <br> context.lineTo(canvas.width/2, 0); <br> context.stroke(); <br>
           </code>
         </p>
       </li>
-      <li> Dessinez un cercle de rayon <code>radius</code> pixels centré dans le canvas, avec <code>radius</code> égal à 80% du minimum entre la largeur ( <code>canvas.width</code>) et la hauter <code>canvas.height</code> du canvas. Il servira de cadre à notre horloge. <p class="answer"> Le code suivant permet de dessiner le cercle : <code>
+      <li> Dessinez un cercle de rayon <code class="language-javascript">radius</code> pixels centré dans le canvas, avec <code class="language-javascript">radius</code> égal à 80% du minimum entre la largeur ( <code class="language-javascript">canvas.width</code>) et la hauter <code class="language-javascript">canvas.height</code> du canvas. Il servira de cadre à notre horloge. <p class="answer"> Le code suivant permet de dessiner le cercle : <code class="language-javascript">
             <br> let radius = (Math.min(canvas.height, canvas.width)/2)*0.8; <br> context.beginPath(); <br> context.strokeStyle = "black"; <br> context.arc(canvas.width/2, canvas.height/2, radius, 0, 2 * Math.PI); <br> context.stroke(); <br>
           </code>
         </p>
@@ -39,46 +39,46 @@
       <li> Indiquez les formules mathématiques qui permettent pour une valeur de 0 à 60 secondes de trouver les coordonnées x et y du sommet de l'aiguille. <p class="answer"> Pour calculer le sommet de l'aiguille : <br> x = Coordonée x du centre du cercle + rayon + cosinus(PI*(secondes-15)/30) <br> Y = Coordonée y du centre du cercle + rayon + sinus(PI*(secondes-15)/30) <br>
         </p>
       </li>
-      <li> Modifiez le code pour faire bouger la trotteuse (nom de l'aiguille des secondes) en fonction des secondes. <p class="answer"> On change les arguments de <code>moveTo</code> permettant de tracer la trotteuse avec les valeurs de xTop et yTop. <code>
+      <li> Modifiez le code pour faire bouger la trotteuse (nom de l'aiguille des secondes) en fonction des secondes. <p class="answer"> On change les arguments de <code class="language-javascript">moveTo</code> permettant de tracer la trotteuse avec les valeurs de xTop et yTop. <code class="language-javascript">
             <br> let xTop = canvas.width/2 + radius * Math.cos(Math.PI*((seconds-15)/30)); <br> let yTop = canvas.height/2 + radius * Math.sin(Math.PI*((seconds-15)/30)); <br>
           </code>
         </p>
-        <br> Note: <code>context.clearRect(...)</code> permet d'effacer le canvas.
+        <br> Note: <code class="language-javascript">context.clearRect(...)</code> permet d'effacer le canvas.
       </li>
-      <li> Modifiez votre code pour afficher la trocodeeuse en rouge et le cadre en bleu clair. <p class="answer"> Avant de dessiner la trotteuse, on ajoute la ligne <code>context.strokeStyle = "red";</code>
-          <br> Avant de dessiner le cadre, on ajoute la ligne <code>context.strokeStyle = "lightblue";</code>
+      <li> Modifiez votre code pour afficher la trocodeeuse en rouge et le cadre en bleu clair. <p class="answer"> Avant de dessiner la trotteuse, on ajoute la ligne <code class="language-javascript">context.strokeStyle = "red";</code>
+          <br> Avant de dessiner le cadre, on ajoute la ligne <code class="language-javascript">context.strokeStyle = "lightblue";</code>
         </p>
-        <br> Réglez à 3 pixels l'épaisseur du trait du cadre. <p class="answer"> Avant de dessiner la trocodeeuse, on ajoute la ligne <code>context.lineWidth = 1;</code>
-          <br> Avant de dessiner le cadre, on ajoute la ligne <code>context.lineWidth = 3;</code>
+        <br> Réglez à 3 pixels l'épaisseur du trait du cadre. <p class="answer"> Avant de dessiner la trocodeeuse, on ajoute la ligne <code class="language-javascript">context.lineWidth = 1;</code>
+          <br> Avant de dessiner le cadre, on ajoute la ligne <code class="language-javascript">context.lineWidth = 3;</code>
         </p>
       </li>
-      <li> Affichez en plus de la trotteuse, l'aiguille des minutes (la grande aiguille) en noire. <br> Note: pitié, ne dupliquez pas le code ! <p class="answer"> Pour dessiner une aiguille, j'ai créé la fonction <code>function drawAiguille(context, canvas, color, counter, maxCounter, radius, lineWidth, lineLength);</code>. Elle utilise le contexte et les données envoyés pour calculer puis dessiner l'aiguille sur l'horloge. <br> Exemple d'utilisation de la fonction : <code>
+      <li> Affichez en plus de la trotteuse, l'aiguille des minutes (la grande aiguille) en noire. <br> Note: pitié, ne dupliquez pas le code ! <p class="answer"> Pour dessiner une aiguille, j'ai créé la fonction <code class="language-javascript">function drawAiguille(context, canvas, color, counter, maxCounter, radius, lineWidth, lineLength);</code>. Elle utilise le contexte et les données envoyés pour calculer puis dessiner l'aiguille sur l'horloge. <br> Exemple d'utilisation de la fonction : <code class="language-javascript">
             <br> /* Dessin aiguille des minutes */ <br> drawAiguille(context, canvas, "red", seconds, date.getSeconds(), radius, 1, 1); <br> /* Dessin aiguille des heures */ <br> drawAiguille(context, canvas, "black", date.getMinutes(), 60, radius, 1, 1); <br>
           </code>
         </p>
       </li>
-      <li> Ajoutez l'aiguille des heures, qui doit être d'une longueur inférieure aux deux autres aiguilles (disons 80%), mais plus large, toujours en essayant de 'factoriser' le code. <p class="answer"> J'ajoute un appel à la fonction drawAiguille <code>
+      <li> Ajoutez l'aiguille des heures, qui doit être d'une longueur inférieure aux deux autres aiguilles (disons 80%), mais plus large, toujours en essayant de 'factoriser' le code. <p class="answer"> J'ajoute un appel à la fonction drawAiguille <code class="language-javascript">
             <br> drawAiguille(context, canvas, "black", date.getHours(), 12, radius, 1.8, 0.8); <br>
           </code>
         </p>
       </li>
-      <li> Ajoutez 12 traits de graduation ('ticks') en bleue foncé, autour du cadre de l'horloge. Un trait aura une longueur de 3 pixels. <p class="answer"> La fonction <code>drawTicks</code> vas nous permettre de dessiner les 12 traits de graduations : <code>
+      <li> Ajoutez 12 traits de graduation ('ticks') en bleue foncé, autour du cadre de l'horloge. Un trait aura une longueur de 3 pixels. <p class="answer"> La fonction <code class="language-javascript">drawTicks</code> vas nous permettre de dessiner les 12 traits de graduations : <code class="language-javascript">
             <br> function drawTicks(context, canvas, radius, lineLength, lineWidth, color, tickNumber) { <br> &nbsp;context.lineWidth = lineWidth; <br> &nbsp;context.strokeStyle = color; <br> &nbsp;for(let i = 0; i &lt; 12; i++) { /* Pour les 12 ticks de l'horloge*/ <br> &nbsp;&nbsp;context.beginPath(); <br> &nbsp;&nbsp;/* Point de départ*/ <br> &nbsp;&nbsp;context.moveTo( <br> &nbsp;&nbsp;&nbsp;(canvas.width/(2)) + (radius) * Math.cos(Math.PI*((i-(tickNumber/4))/(tickNumber/2))), <br> &nbsp;&nbsp;&nbsp;(canvas.height/(2)) + (radius) * Math.sin(Math.PI*((i-(tickNumber/4))/(tickNumber/2))) <br> &nbsp;&nbsp;); <br> &nbsp;&nbsp;/*Point d'arrivé*/ <br> &nbsp;&nbsp;context.lineTo( <br> &nbsp;&nbsp;&nbsp;(canvas.width/(2)) + (radius+lineLength) * Math.cos(Math.PI*((i-(tickNumber/4))/(tickNumber/2))), <br> &nbsp;&nbsp;&nbsp;(canvas.height/(2)) + (radius+lineLength) * Math.sin(Math.PI*((i-(tickNumber/4))/(tickNumber/2))) <br> &nbsp;&nbsp;); <br> &nbsp;&nbsp;context.stroke(); <br> &nbsp;} <br> } </code>
-          <br> On appel la fonction de la manière qui suit : <code>drawTicks(context, canvas, radius, 30, 3, "lightblue", 12)</code> et nos traits de graduation sont dessinés.
+          <br> On appel la fonction de la manière qui suit : <code class="language-javascript">drawTicks(context, canvas, radius, 30, 3, "lightblue", 12)</code> et nos traits de graduation sont dessinés.
         </p>
       </li>
     </ol>
     <h2>Exercice 2 - Horloges de différentes tailles </h2>
     <p>On veut faire en sorte d'avoir plusieurs horloges de différentes tailles sur une même page. On utilisera pour cela la page Web exo2.html.</p>
     <ol>
-      <li> Faites en sorte que la taille de l'horloge puisse varier en fonction de la taille du canvas <br> Un canvas a une propriété <code>width</code> et une propriété <code>height</code>. <br> Dans le cas où la largeur et la hauteur d'un canvas n'est pas la même, prenez la valeur minimum entre les deux et laisser des bandes de chaque coté. <p class="answer">Pour ce faire, lors du calcul du rayon, il faut utiliser les propriétés <code>canvas.width</code> & <code>canvas.height</code> lors du dessin sur le canvas plutôt que des valeurs fixes. </p>
+      <li> Faites en sorte que la taille de l'horloge puisse varier en fonction de la taille du canvas <br> Un canvas a une propriété <code class="language-javascript">width</code> et une propriété <code class="language-javascript">height</code>. <br> Dans le cas où la largeur et la hauteur d'un canvas n'est pas la même, prenez la valeur minimum entre les deux et laisser des bandes de chaque coté. <p class="answer">Pour ce faire, lors du calcul du rayon, il faut utiliser les propriétés <code class="language-javascript">canvas.width</code> & <code class="language-javascript">canvas.height</code> lors du dessin sur le canvas plutôt que des valeurs fixes. </p>
       </li>
-      <li> Faites en sorte d'avoir une fonction <code>startClock</code> qui prend en paramètre l'id d'un canvas qui sert d'unique point d'entrée pour faire fonctionner une horloge. <br> Testez avec l'affichage des 2 horloges de tailles différentes (on est d'accord, on peut en ajouter plus !). <p class="answer"> Fonction startClock() en question : <code>
+      <li> Faites en sorte d'avoir une fonction <code class="language-javascript">startClock</code> qui prend en paramètre l'id d'un canvas qui sert d'unique point d'entrée pour faire fonctionner une horloge. <br> Testez avec l'affichage des 2 horloges de tailles différentes (on est d'accord, on peut en ajouter plus !). <p class="answer"> Fonction startClock() en question : <code class="language-javascript">
             <br> function startClock(canvasID) { <br> &nbsp;let canvas = document.getElementById(canvasID); <br> &nbsp;let context = canvas.getContext("2d"); <br> &nbsp;window.setInterval(refresh, 1000, canvas, context); <br> } <br>
           </code>
         </p>
       </li>
-      <li> Question top moumoute, faites en sorte de garantir que les aiguilles des différentes horloges soient synchrones (i.e. misent à jour toutes en même temps). <p class="answer"> Pour mettre à jour toutes les aiguilles en même temps, il faut avoir un unique appel à la fonction <code>setInterval()</code> qu'une seule fois. Pour cela, la fonction startClock ajoute le canvas & son contexte dans une variable globale. Cette variable globale est un tableau où tous les éléments sont itérés et passé en argument de <code>refresh()</code> dans la fonction passé en première argument de <code>setInterval()</code>; </p>
+      <li> Question top moumoute, faites en sorte de garantir que les aiguilles des différentes horloges soient synchrones (i.e. misent à jour toutes en même temps). <p class="answer"> Pour mettre à jour toutes les aiguilles en même temps, il faut avoir un unique appel à la fonction <code class="language-javascript">setInterval()</code> qu'une seule fois. Pour cela, la fonction startClock ajoute le canvas & son contexte dans une variable globale. Cette variable globale est un tableau où tous les éléments sont itérés et passé en argument de <code class="language-javascript">refresh()</code> dans la fonction passé en première argument de <code class="language-javascript">setInterval()</code>; </p>
       </li>
     </ol>
   </body>
