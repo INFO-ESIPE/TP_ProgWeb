@@ -52,10 +52,230 @@
     <h3>Exercice 1 - Stock Tickers </h3>
     <p>
         <b>
-            1.Faire en sorte que lorsque l'on clique sur le bouton "Refresh", les tickers (les noms des actions en abrégé) soient affichés dans la console en faisant une requête AJAX (grâce à un fetch) sur l'API REST.
+            1. Faire en sorte que lorsque l'on clique sur le bouton "Refresh", les tickers (les noms des actions en abrégé) soient affichés dans la console en faisant une requête AJAX (grâce à un fetch) sur l'API REST.
         </b>
         <br>
-        
+        On définit la méthode onclick de l'objet DOM ayant pour id refreshButton.
+        Puis on fait un appel à fetch en lui passant en argument la route vers l'API (http://localhost:8080/api/ticker).
+        Fetch ne renvoit pas directement les données mais un objet Promise. Pour récupérer les données, il faut utiliser sa fonction .then() et lui passer en argument une fonction qui s'éxécutera quand la requête vers le serveur sera terminé.
+        Les données envoyées par le serveur sont en format JSON. Pour les récupérer une fois la réponse obtenue, on utilise la méthode .json() qui renvoit à son tour une promesse ayant pour paramètre dans la fonction définie dans then() les données converties en objet javascript.
+        <code>
+    refreshButton.onclick = () => {
+        fetch("http://localhost:8080/api/ticker")
+            .then(response => {
+            if(response.ok) {
+                return response.json();
+            }
+            throw Error(response.statusText);
+            })
+            .then(data => console.log(data))
+            .catch(err => console.log(err.message));
+        }
+        </code>
     </p>
+    <p>
+        <b>
+            2. Utiliser les noms des actions obtenus par la requête AJAX pour créer une table d'une colonne avec pour chaque ligne le nom de l'action lorsque l'utilisateur clique sur "Refresh". 
+        </b>
+        <br>
+        Pour créer une table en fonction de retour de la requête AJAX, il faut modifier la fonction qu'on passe en argument de la méthode then().
+        Cette fonction vas créer un élémént DOM tr, où, pour chaque élément du tableau de données renvoyés par la requête, on lui ajoute un th contenant le texte de l'élément.
+        <code>
+    [...]
+    .then(data => {
+        stockTable.innerHTML = "";
+        let tr = document.createElement("TR");
+
+        data.forEach(ticker => {
+            let th = document.createElement("TH");
+            th.innerText = ticker;
+            tr.appendChild(th); 
+        });
+        
+        stockTable.appendChild(tr);
+        })
+    [...]
+        </code>
+    </p>
+    <p>
+        <b>
+            3. On souhaite maintenant afficher sur la console les quotations courante. Pour cela, nous allons effectuer une seconde requête AJAX (un POST) une fois que la requête AJAX pour obtenir les tickers a été effectuée. 
+        </b>
+        <br>
+        Comme pour la requête GET, on utilise la fonction fetch avec un autre paramètre :
+        <code>
+    fetch("http://localhost:8080/api/stock", { method : "post" })
+        .then(response => {
+        if(response.ok) {
+            return response.json();
+        }
+        throw Error(response.statusText);
+        })
+        .then(data => console.log(data))
+        .catch(err => console.log(err.message));
+        </code>
+    </p>
+    <p>
+        <b>
+            4. Expliquer en commentaire dans le code, pourquoi lors de la conception de l'API, pour le endpoint /api/stock, une requête POST a été choisie plutôt qu'une requête GET. 
+        </b>
+        <br>
+        On utilise la méthode POST plutôt que la méthode GET pour cette requête car les données qu'on récupère avec /api/stock sont dynamique. La méthode GET a une gestion de cache pour les requêtes qu'on répète contrairement à la métode POST. Etant donnée que les données sont changeante, on préfère l'implémenter avec la méthode POST.
+    </p>
+    <p>
+        <b>
+            5.  Modifier de nouveau votre code pour afficher sur la console les quotations (une par ligne) mais dans l'ordre des tickers (les noms des actions en abrégé renvoyé par la première requête AJAX). Comme cela l'ordre ne changera pas d'un refresh à l'autre. 
+        </b>
+        <br>
+        Pour afficher les quotations dans l'ordre des tickers, on écrit la requête POST à la fin de la fonction définit de la méthode then de la requête GET.
+        Puis, dans le résultat la méthode then du POST, on regarde, pour chaque ticker, la valeur qui y est associé dans l'objet renvoyé par la requête POST : 
+        <code>
+    [...]
+    /* Récupération des quotations courantes pour les actions */
+    fetch("http://localhost:8080/api/stock", { method : "post" })
+        .then(response => {
+        if(response.ok) {
+            return response.json();
+        }
+        throw Error(response.statusText);
+        })
+        .then(stocks => {
+            tickers.forEach(ticker => {
+                console.log(stocks[ticker]);
+            });
+        })
+        .catch(err => console.log(err.message));
+        [...]
+    </code>
+    </p>
+    <p>
+        <b>
+            6. On souhaite maintenant afficher une table à deux colonnes, avec les noms des actions dans la première colonne et les quotations de cette action dans la seconde colonne. 
+        </b>
+        <br>
+        On a une fonction createTable(lineCount) qui créé une table vide de 2 colonnes et lineCount lignes. Elle est apellée au retour de la requête GET avec pour argument le nombre d'actions.
+        Enfin,une fonction fillTable(table, tickers, stocks) qui prend l'objet DOm de la table, les actions et les quotations pour la remplir. Elle est apellée au retour de la requête POST avec toutes les données récupérées.
+    </p>
+    <p>
+        <b>
+            7. Modifier le code pour afficher une table avec 11 colonnes, la première contenant les noms des actions, la seconde le résultat des quotations ("-" tant que la valeur de la quotation n'est pas arrivée) et pour les 9 colonnes restantes avec des cellules contenant le texte "-". 
+        </b>
+        La fonction createTable(tickers, colomnsCount) prend désormais en argument la liste des actions et le nombre de colonnes en plus à ajouter (10). Elle vas créer la première colonne des actions et 10 colonnes vides avec "-" dedans.
+        La fonction fillColumn(table, columnNum, tickers, stocks) vas désormais remplir la colonne numéro "columnNum" à partir des données des quotations (stocks) dans l'ordre indiqué par l'argument "actions".
+        <br>
+    </p>
+        <p>
+        <b>
+            8.  Faite en sorte d'afficher 10 quotations en envoyant une requête de demande de quotations toutes les secondes et en stockant les quotations dans le tableau (dans les 10 colonnes). 
+        </b>
+        Pour récupérer les 10 quotations à une seconde d'interval, on réalise la requête POST toutes les secondes avec un setTimeout qu'on lance 10 fois dans une boucle for :
+        <code>
+    for(let i = 0; i &lt; MAX_COLUMNS; i++) {
+        window.setTimeout(() => {
+            fetch("http://localhost:8080/api/stock", { method : "post" })
+            .then(response => {
+                if(response.ok) {
+                return response.json();
+                }
+                throw Error(response.statusText);
+            })
+            .then(stocks => {
+                fillColumn(stockTable, i, tickers, stocks);
+                
+            })
+            .catch(err => console.log(err.message));
+        }, 1000 + (i*1000));
+    }
+        </code>
+    </p>
+    <p>
+        <b>
+            9. Faite en sorte que lorsqu'un utilisateur met une valeur dans le champ texte à droite du bouton "Refresh", toutes les quotations inférieurs à la valeur soient affichées en vert (les autres restent en noir). 
+        </b>
+        <br>
+        A chaque appel de onkeyup, on inspecte toutes les valeurs contenues dans la table et on les compares à la valeur contenue dans le l'input pour savoir si on ajoute ou retire la class CSS "good-quotation" qui met le texte en vert.
+        <code>
+    markText.onkeyup = () => {
+        let minValue = parseInt(markText.value);
+        
+        for(let i = 0; i &lt; stockTable.children.length; i++) {
+            for(let j = 1; j &lt; stockTable.children[i].children.length; j++) {
+                let writtenValue = parseInt(stockTable.children[i].children[j].innerText);
+
+                if(   Number.isInteger(minValue) 
+                    && Number.isInteger(writtenValue)
+                    && writtenValue &lt;= minValue) {
+
+                    stockTable.children[i].children[j].classList.add("good-quotation");
+                } else {
+                    stockTable.children[i].children[j].classList.remove("good-quotation");
+                }
+            }
+        }
+    }
+        
+        </code>
+    </p>
+    <p>
+        <b>
+            10. Si cela n'a pas déjà été fait, faites en sorte que si l'on clique sur refresh alors qu'il y a une valeur dans le champ texte, les quotations s'affiche bien en vert lorsqu'elles apparaissent et ont une valeur inférieure à la valeur du champ texte. 
+        </b>
+        <br>
+        On modifie la fonction fillColumn. Lorsqu'on met à jour le texte d'une balise TR, on vérifie avant si la valeur qu'on inscrit est inférieure à parseInt(markText.value). Si c'est le cas, on ajoute la classe "good-quotation" à la balise :
+        <code>
+    [...]
+    function fillColumn(table, columnNum, tickers, stocks) {
+        let minValue = parseInt(markText.value);
+        
+        for(let i = 0; i &lt; tickers.length; i++) {
+            table.children[i].children[columnNum+1].innerText = stocks[tickers[i]];
+        
+            if(Number.isInteger(minValue)
+            && stocks[tickers[i]] &lt;= minValue) {
+            table.children[i].children[columnNum+1].classList.add("good-quotation");
+            }
+        }
+    }
+    [...]
+        </code>
+    </p>
+    <p>
+        <b>
+        11. Que se passe-t-il si on appuie sur "Refresh" plusieurs fois rapidement.
+        </b>
+        <br>
+        Lorsqu'on clique plusieurs fois rapidement sur "Refresh", plusieurs, le tableau garde les anciennes valeurs et continue à faire les anciennes requêtes POST.
+        Pour corriger celà, à chaque clique de "Refresh", il faut vider la table puis retirer tous les setTimeout en cours.
+        A chaque fois qu'on créé un écrit un setTimeout, on ajoute sa valeur de retour dans un tableau timeoutIDs. Puis, au clique sur "Refresh", on fait un clearTimeout sur tous les éléments du tableau avant de le vider.
+        <code>
+            
+    window.onload = () => {
+        [...]
+        let timeoutIDs = [];
+        
+        [...]
+
+        timeoutIDs.forEach(timeoutId => {clearTimeout(timeoutId)});
+        timeoutIDs = [];
+        for(let i = 0; i &lt; MAX_COLUMNS; i++) {
+          timeoutIDs.push(
+            window.setTimeout(() => {
+            [...]
+          );
+        }
+        [...]
+    }
+        </code>
+        Et dans le code de createTable, on veille à bien vider le contenu HTML de la table :
+        <code>
+    function createTable(tickers, colomnsCount) {
+        let table = document.getElementById("stockTable"); // Change position
+        
+        table.innerHTML = "";
+        [...]
+    }
+        </code>
+    </p>
+
 </body>
 </html>
