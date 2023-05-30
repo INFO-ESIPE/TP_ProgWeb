@@ -100,6 +100,7 @@ function fillColumn(table, columnNum, tickers, stocks) {
 
   for(let i = 0; i < tickers.length; i++) {
     table.children[i].children[columnNum+1].innerText = stocks[tickers[i]];
+    table.children[i].children[columnNum+1].classList.add("quotation");
 
     if(Number.isInteger(minValue)
     && stocks[tickers[i]] <= minValue) {
